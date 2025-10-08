@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>إدخال البيان الجمركي — A4 mm</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @page { size: A4; margin: 8mm; }
+  *{box-sizing:border-box}
+  body{font-family:"Noto Naskh Arabic",Tahoma,system-ui;background:#0b0f19;color:#eaeef8;margin:0}
+  header{padding:14px 18px;background:#111827;position:sticky;top:0}
+  h1{margin:0;font-size:18px}
+  .wrap{padding:16px}
+  .card{background:#101418;border:1px solid #222;border-radius:12px;padding:14px;margin-bottom:14px}
+  label{display:block;font-size:13px;margin:4px 0}
+  input,select,textarea{width:100%;padding:9px;border:1px solid #2b2f36;border-radius:8px;background:#0b0f19;color:#eaeef8}
+  .grid{display:grid;gap:10px}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .btn{background:#2563eb;border:none;color:#fff;padding:12px 16px;border-radius:10px;font-weight:bold;cursor:pointer}
+  .tbl{overflow:auto}
+  table{width:100%;border-collapse:collapse;background:#0b0f19}
+  th,td{border:1px solid #30343b;padding:6px;font-size:12px}
+  th{background:#1f2937}
+  @media(max-width:900px){.g4,.g3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>إدخال البيان الجمركي — نموذج مطابق A4 بالمليمتر</h1></header>
+
+<form method="post" action="/print">
+<div class="wrap">
+
+  <!-- البيانات الأساسية -->
+  <div class="card">
+    <h3>البيانات الأساسية</h3>
+    <div class="grid g4">
+      <div><label>رقم البيان</label><input name="no" required></div>
+      <div><label>نوع البيان</label><input name="type" placeholder="استيراد/تصدير/ترانزيت"></div>
+      <div><label>تاريخ البيان</label><input type="date" name="date"></div>
+      <div><label>المنفذ الجمركي</label><input name="port"></div>
+
+      <div><label>رقم المعاملة</label><input name="case_no"></div>
+      <div><label>وسيلة النقل</label><input name="transport" placeholder="سفينة/طائرة/شاحنة"></div>
+      <div><label>المخلص/وكيل الشحن</label><input name="broker_no"></div>
+      <div><label>نوع العملية</label><input name="op_type"></div>
+
+      <div><label>رقم الرحلة/الشاحنة</label><input name="trip_no"></div>
+      <div><label>بلد الدخول/الخروج</label><input name="border_country"></div>
+    </div>
+  </div>
+
+  <!-- بيانات المستورد/المصدر -->
+  <div class="card">
+    <h3>بيانات المستورد/المصدر</h3>
+    <div class="grid g3">
+      <div><label>الاسم الكامل</label><input name="party_name"></div>
+      <div><label>الرقم الجمركي</label><input name="customs_id"></div>
+      <div><label>السجل التجاري</label><input name="cr"></div>
+
+      <div><label>رقم الهوية/الإقامة</label><input name="national_id"></div>
+      <div><label>العنوان</label><input name="address"></div>
+      <div><label>المدينة/الدولة</label><input name="city_country"></div>
+
+      <div><label>الهاتف/البريد</label><input name="contact"></div>
+      <div><label>بلد المقصد</label><input name="dest_country"></div>
+    </div>
+  </div>
+
+  <!-- تفاصيل البضاعة -->
+  <div class="card tbl">
+    <h3>تفاصيل البضاعة (حتى 10 أسطر)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>HS</th><th>وصف البضاعة</th><th>كمية</th><th>وحدة</th>
+          <th>وزن صافي</th><th>وزن إجمالي</th>
+          <th>قيمة أجنبية</th><th>سعر الصرف</th><th>قيمة محلية</th>
+          <th>بلد المنشأ</th><th>رقم الفاتورة</th><th>تاريخ الفاتورة</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in range(1,11) %}
+        <tr>
+          <td><input name="item{{i}}_hs"></td>
+          <td><input name="item{{i}}_desc"></td>
+          <td><input name="item{{i}}_qty"></td>
+          <td><input name="item{{i}}_unit"></td>
+          <td><input name="item{{i}}_net_w"></td>
+          <td><input name="item{{i}}_gross_w"></td>
+          <td><input name="item{{i}}_fx_value"></td>
+          <td><input name="item{{i}}_fx_rate"></td>
+          <td><input name="item{{i}}_local_value"></td>
+          <td><input name="item{{i}}_origin"></td>
+          <td><input name="item{{i}}_inv_no"></td>
+          <td><input type="date" name="item{{i}}_inv_date"></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- الرسوم والضرائب -->
+  <div class="card">
+    <h3>الرسوم والضرائب</h3>
+    <div class="grid g4">
+      <div><label>CIF</label><input name="cif"></div>
+      <div><label
