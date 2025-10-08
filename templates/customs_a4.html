@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>بيان جمركي — A4 mm</title>
+<style>
+  @page { size: A4; margin: 8mm; }
+  :root{ --dx:0mm; --dy:0mm; --row-h:9mm; --row-start:132mm; }
+  *{box-sizing:border-box}
+  body{font-family:"Noto Naskh Arabic",Tahoma,system-ui}
+  .sheet{width:194mm;height:281mm;position:relative}
+  .box{position:absolute;border:0.25mm solid #000;padding:1.8mm;font-size:3.2mm;line-height:1.2;
+       transform:translate(var(--dx),var(--dy));background:#fff}
+  .hdr{background:#e7eefc;font-weight:bold}
+  .cell{border:0.25mm solid #000;display:flex;align-items:center;justify-content:center;font-weight:bold;
+        background:#f4f4f4;font-size:3mm;transform:translate(var(--dx),var(--dy))}
+  .center{text-align:center}
+
+  #title{top:3mm;right:3mm;width:188mm;height:10mm;border:0;font-weight:bold;font-size:5mm;transform:translate(var(--dx),var(--dy));text-align:center}
+
+  /* صف 1 */
+  #no{top:15mm;right:3mm;width:45mm;height:12mm}
+  #type{top:15mm;right:50mm;width:45mm;height:12mm}
+  #date{top:15mm;right:97mm;width:40mm;height:12mm}
+  #port{top:15mm;right:139mm;width:52mm;height:12mm}
+
+  /* صف 2 */
+  #case{top:28mm;right:3mm;width:60mm;height:12mm}
+  #transport{top:28mm;right:65mm;width:60mm;height:12mm}
+  #broker{top:28mm;right:127mm;width:64mm;height:12mm}
+
+  /* صف 3 */
+  #op_type{top:41mm;right:3mm;width:38mm;height:10mm}
+  #trip_no{top:41mm;right:43mm;width:50mm;height:10mm}
+  #border_country{top:41mm;right:95mm;width:96mm;height:10mm}
+
+  /* الطرف */
+  #party_title{top:53mm;right:3mm;width:188mm;height:8mm}
+  #party_name{top:62mm;right:3mm;width:120mm;height:10mm}
+  #customs_id{top:62mm;right:125mm;width:66mm;height:10mm}
+  #cr{top:74mm;right:3mm;width:90mm;height:10mm}
+  #nid{top:74mm;right:95mm;width:60mm;height:10mm}
+  #contact{top:74mm;right:157mm;width:34mm;height:10mm}
+  #address{top:86mm;right:3mm;width:140mm;height:10mm}
+  #city_country{top:86mm;right:145mm;width:46mm;height:10mm}
+  #dest_country{top:98mm;right:3mm;width:188mm;height:10mm}
+
+  /* ترويسة الجدول */
+  #items_title{top:110mm;right:3mm;width:188mm;height:8mm}
+  .grid{position:absolute;top:120mm;right:3mm;width:188mm;height:10mm;display:grid;
+        grid-template-columns:18mm 58mm 18mm 16mm 18mm 18mm 22mm 16mm 22mm 20mm 20mm 18mm}
+  /* أسطر العناصر */
+  {% for i in range(10) %}
+  #row{{i}}{position:absolute;top:calc(var(--row-start) + {{i}} * var(--row-h));right:3mm;width:188mm;height:var(--row-h);display:grid;
+            grid-template-columns:18mm 58mm 18mm 16mm 18mm 18mm 22mm 16mm 22mm 20mm 20mm 18mm;transform:translate(var(--dx),var(--dy))}
+  {% endfor %}
+
+  /* الرسوم */
+  #fees_title{top:222mm;right:3mm;width:188mm;height:8mm}
+  #cif{top:232mm;right:3mm;width:70mm;height:10mm}
+  #duty_value{top:232mm;right:75mm;width:55mm;height:10mm}
+  #vat_value{top:232mm;right:132mm;width:59mm;height:10mm}
+  #other_fees{top:244mm;right:3mm;width:70mm;height:10mm}
+  #grand_total{top:244mm;right:75mm;width:55mm;height:10mm}
+  #pay_method{top:244mm;right:132mm;width:59mm;height:10mm}
+
+  /* الغرامات */
+  #pen_title{top:256mm;right:3mm;width:188mm;height:8mm}
+  #pen_type{top:266mm;right:3mm;width:100mm;height:10mm}
+  #pen_amount{top:266mm;right:105mm;width:86mm;height:10mm}
+
+  /* التوقيعات */
+  #sig_title{top:278mm;right:3mm;width:188mm;height:8mm}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div id="title">البيان الجمركي — نموذج A4 بالمليمتر</div>
+
+  <div id="no" class="box"><b>رقم البيان:</b> {{ d.no }}</div>
+  <div id="type" class="box"><b>نوع البيان:</b> {{ d.type }}</div>
+  <div id="date" class="box"><b>تاريخ:</b> {{ d.date }}</div>
+  <div id="port" class="box"><b>المنفذ:</b> {{ d.port }}</div>
+
+  <div id="case" class="box"><b>رقم المعاملة:</b> {{ d.case_no }}</div>
+  <div id="transport" class="box"><b>وسيلة النقل:</b> {{ d.transport }}</div>
+  <div id="broker" class="box"><b>المخلص/الوكيل:</b> {{ d.broker_no }}</div>
+
+  <div id="op_type" class="box"><b>نوع العملية:</b> {{ d.op_type }}</div>
+  <div id="trip_no" class="box"><b>رقم الرحلة/الشاحنة:</b> {{ d.trip_no }}</div>
+  <div id="border_country" class="box"><b>بلد الدخول/الخروج:</b> {{ d.border_country }}</div>
+
+  <div id="party_title" class="box hdr">بيانات المستورد/المصدر</div>
+  <div id="party_name" class="box"><b>الاسم:</b> {{ d.party_name }}</div>
+  <div id="customs_id" class="box"><b>الرقم الجمركي:</b> {{ d.customs_id }}</div>
+  <div id="cr" class="box"><b>السجل التجاري:</b> {{ d.cr }}</div>
+  <div id="nid" class="box"><b>الهوية/الإقامة:</b> {{ d.national_id }}</div>
+  <div id="contact" class="box"><b>هاتف/بريد:</b> {{ d.contact }}</div>
+  <div id="address" class="box"><b>العنوان:</b> {{ d.address }}</div>
+  <div id="city_country" class="box"><b>مدينة/دولة:</b> {{ d.city_country }}</div>
+  <div id="dest_country" class="box"><b>بلد المقصد:</b> {{ d.dest_country }}</div>
+
+  <div id="items_title" class="box hdr">تفاصيل البضاعة</div>
+  <div class="grid cell" style="height:10mm">
+    <div>HS</div><div>وصف</div><div>كمية</div><div>وحدة</div>
+    <div>وزن صافي</div><div>وزن إجمالي</div>
+    <div>قيمة أجنبية</div><div>سعر صرف</div><div>قيمة محلية</div>
+    <div>المنشأ</div><div>فاتورة</div><div>تاريخ</div>
+  </div>
+
+  {% for r in range(10) %}
+  <div id="row{{r}}">
+    <div class="cell">{{ d.items[r].hs }}</div>
+    <div class="cell">{{ d.items[r].desc }}</div>
+    <div class="cell">{{ d.items[r].qty }}</div>
+    <div class="cell">{{ d.items[r].unit }}</div>
+    <div class="cell">{{ d.items[r].net_w }}</div>
+    <div class="cell">{{ d.items[r].gross_w }}</div>
+    <div class="cell">{{ d.items[r].fx_value }}</div>
+    <div class="cell">{{ d.items[r].fx_rate }}</div>
+    <div class="cell">{{ d.items[r].local_value }}</div>
+    <div class="cell">{{ d.items[r].origin }}</div>
+    <div class="cell">{{ d.items[r].inv_no }}</div>
+    <div class="cell">{{ d.items[r].inv_date }}</div>
+  </div>
+  {% endfor %}
+
+  <div id="fees_title" class="box hdr">الرسوم والضرائب</div>
+  <div id="cif" class="box"><b>CIF:</b> {{ d.cif }}</div>
+  <div id="duty_value" class="box"><b>رسوم جمركية:</b> {{ d.duty_value }} (نسبة {{ d.duty_rate }})</div>
+  <div id="vat_value" class="box"><b>VAT:</b> {{ d.vat_value }}</div>
+  <div id="other_fees" class="box"><b>رسوم أخرى:</b> {{ d.other_fees }}</div>
+  <div id="grand_total" class="box"><b>الإجمالي:</b> {{ d.grand_total }}</div>
+  <div id="pay_method" class="box"><b>طريقة السداد:</b> {{ d.pay_method }}</div>
+
+  <div id="pen_title" class="box hdr">الغرامات</div>
+  <div id="pen_type" class="box"><b>نوع/سبب:</b> {{ d.penalty_type }} — {{ d.penalty_reason }}</div>
+  <div id="pen_amount" class="box"><b>المبلغ/الرقم:</b> {{ d.penalty_amount }} — {{ d.penalty_order }}</div>
+
+  <div id="sig_title" class="box hdr">الملاحظات والتوقيعات — {{ d.auditor_note }} | {{ d.reviewer_note }} | {{ d.customs_seal }} | {{ d.delivery_date }}</div>
+</div>
+<script>window.addEventListener('load',()=>window.print());</script>
+</body>
+</html>
