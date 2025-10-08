@@ -36,33 +36,33 @@
     <h3>البيانات الأساسية</h3>
     <div class="grid g4">
       <div><label>رقم البيان</label><input name="no" required></div>
-      <div><label>نوع البيان</label><input name="type" placeholder="استيراد/تصدير/ترانزيت"></div>
+      <div><label>نوع البيان</label><input name="type" placeholder="استيراد / تصدير / ترانزيت"></div>
       <div><label>تاريخ البيان</label><input type="date" name="date"></div>
       <div><label>المنفذ الجمركي</label><input name="port"></div>
 
       <div><label>رقم المعاملة</label><input name="case_no"></div>
-      <div><label>وسيلة النقل</label><input name="transport" placeholder="سفينة/طائرة/شاحنة"></div>
-      <div><label>المخلص/وكيل الشحن</label><input name="broker_no"></div>
+      <div><label>وسيلة النقل</label><input name="transport" placeholder="سفينة / طائرة / شاحنة"></div>
+      <div><label>المخلص / وكيل الشحن</label><input name="broker_no"></div>
       <div><label>نوع العملية</label><input name="op_type"></div>
 
-      <div><label>رقم الرحلة/الشاحنة</label><input name="trip_no"></div>
-      <div><label>بلد الدخول/الخروج</label><input name="border_country"></div>
+      <div><label>رقم الرحلة / الشاحنة</label><input name="trip_no"></div>
+      <div><label>بلد الدخول / الخروج</label><input name="border_country"></div>
     </div>
   </div>
 
-  <!-- بيانات المستورد/المصدر -->
+  <!-- بيانات المستورد / المصدر -->
   <div class="card">
-    <h3>بيانات المستورد/المصدر</h3>
+    <h3>بيانات المستورد / المصدر</h3>
     <div class="grid g3">
       <div><label>الاسم الكامل</label><input name="party_name"></div>
       <div><label>الرقم الجمركي</label><input name="customs_id"></div>
       <div><label>السجل التجاري</label><input name="cr"></div>
 
-      <div><label>رقم الهوية/الإقامة</label><input name="national_id"></div>
+      <div><label>رقم الهوية / الإقامة</label><input name="national_id"></div>
       <div><label>العنوان</label><input name="address"></div>
-      <div><label>المدينة/الدولة</label><input name="city_country"></div>
+      <div><label>المدينة / الدولة</label><input name="city_country"></div>
 
-      <div><label>الهاتف/البريد</label><input name="contact"></div>
+      <div><label>الهاتف / البريد</label><input name="contact"></div>
       <div><label>بلد المقصد</label><input name="dest_country"></div>
     </div>
   </div>
@@ -105,4 +105,52 @@
     <h3>الرسوم والضرائب</h3>
     <div class="grid g4">
       <div><label>CIF</label><input name="cif"></div>
-      <div><label
+      <div><label>نسبة الرسوم</label><input name="duty_rate" placeholder="%"></div>
+      <div><label>قيمة الرسوم</label><input name="duty_value"></div>
+      <div><label>ضريبة VAT</label><input name="vat_value"></div>
+
+      <div><label>رسوم أخرى</label><input name="other_fees"></div>
+      <div><label>الإجمالي المستحق</label><input name="grand_total"></div>
+      <div><label>طريقة السداد</label><input name="pay_method"></div>
+      <div><label>ملاحظة مالية</label><input name="finance_note"></div>
+    </div>
+  </div>
+
+  <!-- الغرامات -->
+  <div class="card">
+    <h3>الغرامات والمخالفات</h3>
+    <div class="grid g3">
+      <div><label>نوع الغرامة</label><input name="penalty_type"></div>
+      <div><label>سبب الغرامة</label><input name="penalty_reason"></div>
+      <div><label>مبلغ الغرامة</label><input name="penalty_amount"></div>
+      <div><label>رقم أمر الغرامة</label><input name="penalty_order"></div>
+    </div>
+  </div>
+
+  <!-- الملاحظات والتوقيعات -->
+  <div class="card">
+    <h3>الملاحظات والتوقيعات</h3>
+    <div class="grid g4">
+      <div><label>ملاحظات المدقق</label><input name="auditor_note"></div>
+      <div><label>ملاحظات المراجع</label><input name="reviewer_note"></div>
+      <div><label>توقيع المدقق</label><input name="auditor_sign"></div>
+      <div><label>توقيع المراجع</label><input name="reviewer_sign"></div>
+      <div><label>ختم الجمارك</label><input name="customs_seal"></div>
+      <div><label>تاريخ التسليم</label><input type="date" name="delivery_date"></div>
+      <div><label>رقم البيان اليدوي</label><input name="manual_no"></div>
+      <div><label>رقم إذن التخليص</label><input name="release_no"></div>
+      <div><label>طريقة الشحن</label><input name="ship_method"></div>
+      <div><label>جهة الوصول النهائية</label><input name="final_dest"></div>
+      <div><label>رقم إذن التسليم</label><input name="delivery_permit"></div>
+      <div><label>المرفقات</label><input name="attachments"></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:16px 0 30px">
+    <button class="btn" type="submit">طباعة A4 بالمليمتر</button>
+  </div>
+
+</div>
+</form>
+</body>
+</html>
